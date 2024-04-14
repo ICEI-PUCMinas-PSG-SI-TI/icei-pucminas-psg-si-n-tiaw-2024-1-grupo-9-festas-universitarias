@@ -14,3 +14,4 @@ Thiago Villani Marinho
 ## Professores responsáveis
 
 Pedro Felipe Alves de Oliveira
+Caroline Rhaian da Silva Jandre
