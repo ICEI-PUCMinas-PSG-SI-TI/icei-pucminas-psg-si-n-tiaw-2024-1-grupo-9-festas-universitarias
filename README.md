@@ -1,19 +1,16 @@
-# Nome do projeto
-
-Escreva um ou dois parágrafo resumindo o objetivo do seu projeto.
+# UniFest: Calendário de festas e eventos universitários
+A ideia inicial do projeto consiste em um calendário de eventos universitários, onde cada usuário consegue identificar e sincronizar conforme sua agenda pessoal
 
 ## Alunos integrantes da equipe
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+*Ana Luiza Moreira Martins
+*Arthur Rezende de Almeida
+*Higor Gonçalves Barbosa
+*Igor Sena Cordeiro
+*Lucas Ramalho de Barros Torres
+*Thiago Villani Marinho
+
 
 ## Professores responsáveis
 
-* Nome completo do professor 1
-* Nome completo do professor 2
-
-## Instruções de utilização
-
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
+* Pedro Felipe Alves de Oliveira
