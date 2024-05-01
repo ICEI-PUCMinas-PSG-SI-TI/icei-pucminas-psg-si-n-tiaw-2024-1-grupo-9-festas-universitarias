@@ -1,0 +1,44 @@
+#container_calendario{
+    max-height:60rem;
+    max-width: 80%;
+    
+}
+.fc-col-header {
+    background-color: #4270d4;
+    
+}
+.fc-col-header a {
+    color: #f0f0f0;
+    
+}
+
+.main{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+a{
+    color: #7f8ba4
+}
+
+.tamanho{
+    width: 50%;
+}
+
+@media(max-width: 800px){
+    .tamanho{
+        width: 100%;
+    }
+
+    #container_calendario{
+        max-width: 100%;
+    }
+
+    .calendar-header{
+        flex-direction: column;
+    }
+
+    .main{
+        padding-inline: 5px!important;
+    }
+}
