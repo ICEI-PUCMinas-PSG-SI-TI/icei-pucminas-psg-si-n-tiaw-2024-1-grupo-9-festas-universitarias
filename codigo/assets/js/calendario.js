@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var eventos = [
         {
             title: "Calourada PUC",
-            start: moment().format("YYYY-MM-DD"), 
-            end:  moment().format("YYYY-MM-DD"), 
+            start: moment().format(), 
+            end:  moment().format(), 
             color: "#8A2BE2",
             display: "block",
         },
@@ -36,3 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render();
 });
+
+$(document).ready(function() {
+    $("#lastButton").click(function() {
+      $("#modalNovoEvento").modal("show");
+    });
+  });
