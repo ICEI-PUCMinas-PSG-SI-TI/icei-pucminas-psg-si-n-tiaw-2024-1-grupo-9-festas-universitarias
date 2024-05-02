@@ -25,7 +25,20 @@ a{
     width: 50%;
 }
 
-@media(max-width: 800px){
+#legenda1{
+    background-color: #8A2BE2;
+    width: 15px;
+    height: 15px;
+    align-self: center;
+}
+#legenda2{
+    background-color: #21a34f;
+    width: 15px;
+    height: 15px;
+    align-self: center;
+}
+
+@media(max-width: 992px){
     .tamanho{
         width: 100%;
     }
@@ -38,7 +51,12 @@ a{
         flex-direction: column;
     }
 
+    #lastButton{
+        margin-bottom: 2rem;
+    }
+
     .main{
         padding-inline: 5px!important;
+        flex-direction: column;
     }
 }
