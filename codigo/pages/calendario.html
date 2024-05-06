@@ -13,6 +13,8 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <!-- incluindo moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- incluindo currecy -->
+    <script src="https://cdn.jsdelivr.net/npm/currency.js"></script>
     <link rel="stylesheet" href="../assets/css/calendar.css">
     <title>Unifest - Calendário</title>
 </head>
@@ -64,8 +66,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <div class="row">
-                        <div class="col-lg-3">
+                  <div class="row mb-3">
+                        <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="nomeEvento">Nome do Evento:</label>
                                     <div class="input-group">
@@ -75,7 +77,7 @@
                                 </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             
                             <div class="form-group">
                                 <label for="dataInicio">Data de Inicio:</label>
@@ -85,7 +87,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             
                             <div class="form-group">
                                 <label for="dataFim">Data de Encerramento:</label>
@@ -95,6 +97,47 @@
                             </div>
                         </div>
 
+                        
+
+                  </div>
+                  <div class="row mb-2">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="qtdPessoas">Quantidade e Participantes:</label>
+                                <div class="input-group">
+                                    <input type="number" id="qdtPessoas" name="qtdPessoas" class="form-control"/>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="endereco">Endereço:</label>
+                                <div class="input-group">
+                                    <input type="text" id="endereo" name="endereco" class="form-control"/>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="preco">Preço:</label>
+                                <div class="input-group">
+                                    <input type="text" id="preco" placeholder="R$0,00" name="preco" class="form-control"/>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="descricao">Descrição:</label>
+                            <textarea class="form-control" id="descricao" rows="4" style="resize: none;"></textarea>
+                          </div>
+                    </div>
                   </div>
                 </div>
                 <div class="modal-footer">

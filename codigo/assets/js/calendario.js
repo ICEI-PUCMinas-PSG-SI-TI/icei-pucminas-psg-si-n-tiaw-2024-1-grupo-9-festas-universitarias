@@ -42,3 +42,26 @@ $(document).ready(function() {
       $("#modalNovoEvento").modal("show");
     });
   });
+
+  $('#preco').change(function(){
+    let valor = $(this).val().replace(/[^\d,]/g, '');
+    
+    let valorNumerico = parseFloat(valor.replace(',', '.'));
+
+    let valorFormatado = valorNumerico.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    });
+
+    if($(this).val().trim() == "" ||$(this).val().trim() == "R$" ){
+        $(this).val("");
+    }else{
+        $(this).val(valorFormatado);
+
+    }
+
+
+    console.log(valor, valorFormatado);
+});
+
+
