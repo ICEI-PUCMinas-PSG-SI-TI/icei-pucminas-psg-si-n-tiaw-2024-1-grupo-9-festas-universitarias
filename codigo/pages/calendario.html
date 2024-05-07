@@ -103,7 +103,7 @@
                   <div class="row mb-2">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="qtdPessoas">Quantidade e Participantes:</label>
+                                <label for="qtdPessoas">Quantidade de Participantes:</label>
                                 <div class="input-group">
                                     <input type="number" id="qdtPessoas" name="qtdPessoas" class="form-control"/>
                                     
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="preco">Preço:</label>
                                 <div class="input-group">
@@ -129,6 +129,13 @@
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="tipo">Tipo:</label>
+                            <select class="form-select selectpicker" aria-label="tipo" id="tipo" name="tipo" value="">
+                                <option value="1">Festa Universitária</option>
+                                <option value="2">Palestra</option>
+                              </select>
                         </div>
                   </div>
                   <div class="row">
@@ -152,7 +159,7 @@
     
       
     <!-- incluindo o script de inicialização do calendario -->
-    <script src="../assets/js/calendario.js"></script>
+    <script src="../assets/js/calendario.js"></script> 
     <!-- incluindo script bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

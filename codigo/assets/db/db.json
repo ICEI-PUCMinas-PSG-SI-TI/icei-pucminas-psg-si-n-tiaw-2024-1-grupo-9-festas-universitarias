@@ -1,0 +1,15 @@
+{
+  "eventos": [
+    {
+      "id": "d74c",
+      "nomeEvento": "Calourada PUC",
+      "dataInicio": "2024-05-06T19:00",
+      "dataFim": "2024-05-06T23:59",
+      "participantes": "150",
+      "endereco": "Rua Walter Ianni, 255 - São Gabriel, Belo Horizonte",
+      "preco": "R$30,00",
+      "tipo": "1",
+      "descricao": "Teste cadastro de evento trabalho de diw, festa muito legal, testeeeeeee"
+    }
+  ]
+}
