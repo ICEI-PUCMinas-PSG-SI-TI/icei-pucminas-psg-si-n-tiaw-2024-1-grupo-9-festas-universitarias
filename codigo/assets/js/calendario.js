@@ -48,7 +48,7 @@ $('#preco').change(function(){
         $(this).val(valorFormatado);
     }
 
-    console.log(valor, valorFormatado);
+    //console.log(valor, valorFormatado);
 });
 
 function buscarEventos() {
@@ -86,3 +86,118 @@ function buscarEventos() {
         console.error('Ocorreu um erro:', error);
       });
 }
+
+
+
+$('#salvar').click(function(){
+    var request = true
+    var nomeEvento = $('#nomeEvento').val()
+    var dataInicio = $('#dataInicio').val()
+    var dataFim = $('#dataFim').val()
+    var participantes = $('#qtdPessoas').val()
+    var endereco = $('#endereco').val()
+    var preco = $('#preco').val()
+    var tipo = $('#tipo').val()
+    var descricao = $('#descricao').val()
+
+    console.log({
+        nomeEvento,
+        dataInicio,
+        dataFim,
+        participantes,
+        endereco,
+        preco,
+        tipo,
+        descricao
+    })
+
+
+    if(nomeEvento.trim()==""||
+       dataInicio.trim()==""||
+       dataFim.trim()==""||
+       participantes == ""||
+       endereco.trim()==""||
+       tipo == null
+    ){
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Preencha os campos obrigatórios!',
+          });
+          
+        request = false
+    }
+
+
+    if(!request){
+        return
+    }
+
+    const url = 'http://localhost:3000/eventos';
+
+    const data = {
+        nomeEvento,
+        dataInicio,
+        dataFim,
+        participantes,
+        endereco,
+        preco,
+        tipo,
+        descricao
+      };
+    
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+
+      fetch(url, options)
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Erro ao fazer a requisição: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: 'Evento cadastrado com sucesso!',
+              }).then(function() {
+                $("#modalNovoEvento").modal("toggle");
+                var calendarEl = document.getElementById('calendar');
+                var calendar;
+                buscarEventos()
+                    .then(eventos => {
+                        calendar = new FullCalendar.Calendar(calendarEl, {
+                            themeSystem: 'bootstrap',
+                            eventColor: 'green',
+                            nextDayThreshold: '09:00:00',
+                            eventContent: function(arg) {
+                                return {
+                                    html: '<b>' + arg.timeText + '</b> ' + arg.event.title
+                                };
+                            },
+                            events: eventos,
+                            height: 'auto',
+                            aspectRatio: 1.5,
+                            locale: 'pt-br'
+                        });
+
+                        calendar.render();
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar eventos:', error);
+                    });
+              });
+        })
+        .catch(error => {
+            console.error('Ocorreu um erro:', error);
+        });
+
+
+
+})
