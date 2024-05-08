@@ -100,16 +100,16 @@ $('#salvar').click(function(){
     var tipo = $('#tipo').val()
     var descricao = $('#descricao').val()
 
-    console.log({
-        nomeEvento,
-        dataInicio,
-        dataFim,
-        participantes,
-        endereco,
-        preco,
-        tipo,
-        descricao
-    })
+    // console.log({
+    //     nomeEvento,
+    //     dataInicio,
+    //     dataFim,
+    //     participantes,
+    //     endereco,
+    //     preco,
+    //     tipo,
+    //     descricao
+    // })
 
 
     if(nomeEvento.trim()==""||
@@ -168,6 +168,14 @@ $('#salvar').click(function(){
                 text: 'Evento cadastrado com sucesso!',
               }).then(function() {
                 $("#modalNovoEvento").modal("toggle");
+                $('#nomeEvento').val("")
+                $('#dataInicio').val("")
+                $('#dataFim').val("")
+                $('#qtdPessoas').val("")
+                $('#endereco').val("")
+                $('#preco').val("")
+                $('#tipo').val("")
+                $('#descricao').val("")
                 var calendarEl = document.getElementById('calendar');
                 var calendar;
                 buscarEventos()
