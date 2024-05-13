@@ -1,26 +1,37 @@
 {
   "eventos": [
     {
-      "id": "01aa",
-      "nomeEvento": "Palestra",
-      "dataInicio": "2024-05-14T20:44",
-      "dataFim": "2024-05-14T20:44",
-      "participantes": "100",
-      "endereco": "PUC Minas São Gabriel",
-      "preco": "R$ 10,00",
-      "tipo": "2",
-      "descricao": "teste"
+      "id": "d554",
+      "nomeEvento": "Calourada PUC",
+      "dataInicio": "2024-05-06T19:00",
+      "dataFim": "2024-05-06T23:59",
+      "participantes": "150",
+      "endereco": "Rua Walter Ianni, 255 - São Gabriel, Belo Horizonte",
+      "preco": "R$30,00",
+      "tipo": "1",
+      "descricao": "Teste cadastro de evento trabalho de diw, festa muito legal, testeeeeeee"
     },
     {
-      "id": "5c96",
-      "nomeEvento": "Festa Teste",
-      "dataInicio": "2024-05-22T20:55",
-      "dataFim": "2024-05-24T20:55",
-      "participantes": "300",
-      "endereco": "PUC Minas São Gabriel",
-      "preco": "R$ 50,00",
+      "id": "f536",
+      "nomeEvento": "teste",
+      "dataInicio": "2024-05-13T18:55",
+      "dataFim": "2024-05-13T18:55",
+      "participantes": "100",
+      "endereco": "nke",
+      "preco": "R$ 1,00",
+      "tipo": "2",
+      "descricao": ""
+    },
+    {
+      "id": "62a0",
+      "nomeEvento": "testeAula",
+      "dataInicio": "2024-05-13T19:55",
+      "dataFim": "2024-05-13T19:55",
+      "participantes": "100",
+      "endereco": "htetse",
+      "preco": "R$ 100,00",
       "tipo": "1",
-      "descricao": "Festa teste wqegboqeibb"
+      "descricao": ""
     }
   ]
 }

@@ -209,3 +209,58 @@ $('#salvar').click(function(){
 
 
 })
+
+function searchArray(){
+    let texto = $('#searchInput').val();
+    let html = ""
+
+   if(texto.trim() != ""){
+        $('#searchResults').removeClass('d-none')
+        $('#searchResults').addClass('d-flex, flex-column,gap-1')
+        let regex = new RegExp(texto, 'i');
+        let filtro = search.filter((s) => regex.test(s.nomeEvento));
+        let id = ""
+        filtro.forEach(dado => {
+            if(dado.tipo == "1"){
+                id = 'festa'
+            }else{
+                id = 'palestra'
+            }
+            html += `<div class='search w-100 p-1 bolder' id='${id}'>${dado.nomeEvento}</div>`
+        })
+   }else{
+        $('#searchResults').removeClass('d-flex')
+        $('#searchResults').addClass('d-none')
+   }
+    $('#searchResults').html(html)
+}
+
+var search = []
+$('#searchInput').click(function(){
+    axios.get('http://localhost:3000/eventos')
+    .then(function (response) {
+        // console.log(response.data)
+        search = []
+        response.data.forEach(dado => {
+            
+            search.push(dado)
+        })
+        searchArray()
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+})
+
+$('#searchInput').keyup(function(){
+    searchArray()
+})
+
+
+
+$('#searchInput').change(function(){
+    $('#searchResults').removeClass('d-flex')
+    $('#searchResults').addClass('d-none')
+})
+
+
