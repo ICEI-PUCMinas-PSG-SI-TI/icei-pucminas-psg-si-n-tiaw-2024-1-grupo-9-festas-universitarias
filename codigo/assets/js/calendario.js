@@ -226,7 +226,7 @@ function searchArray(){
             }else{
                 id = 'palestra'
             }
-            html += `<div class='search w-100 p-1 bolder' id='${id}'>${dado.nomeEvento}</div>`
+            html += `<div class='search w-100 p-1 bolder' onclick='editaEvento("${dado.id}")' id='${id}'>${dado.nomeEvento}</div>`
         })
    }else{
         $('#searchResults').removeClass('d-flex')
@@ -258,9 +258,19 @@ $('#searchInput').keyup(function(){
 
 
 
-$('#searchInput').change(function(){
-    $('#searchResults').removeClass('d-flex')
-    $('#searchResults').addClass('d-none')
-})
+// $('#searchInput').change(function(){
+//     $('#searchResults').removeClass('d-flex')
+//     $('#searchResults').addClass('d-none')
+// })
 
 
+function editaEvento(id){
+    axios.get(`http://localhost:3000/eventos?id=${id}`)
+    .then(function (response) {
+         console.log(response.data[0])
+                    
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+}
