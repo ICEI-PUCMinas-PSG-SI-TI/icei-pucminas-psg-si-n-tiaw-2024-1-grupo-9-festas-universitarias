@@ -169,7 +169,104 @@
         </div>
     </div>
     
+    <div class="modal fade modal-xl" id="modalEditaEvento" tabindex="-1" aria-labelledby="modalEditaEventoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalEditaEventoLabel"> Editar Evento</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row mb-3">
+                        <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="nomeEvento">Nome do Evento: <span class="text-danger ">*</span></label>
+                                    <div class="input-group">
+                                        <input type="text" id="nomeEvento"  name="nomeEvento" class="form-control"/>
+                                        
+                                    </div>
+                                </div>
+                        </div>
 
+                        <div class="col-lg-4">
+                            
+                            <div class="form-group">
+                                <label for="dataInicio">Data de Inicio: <span class="text-danger ">*</span></label>
+                                <div class="input-group">
+                                    <input type="datetime-local"  id="dataInicio" name="dataInicio" class="form-control">                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            
+                            <div class="form-group">
+                                <label for="dataFim">Data de Encerramento: <span class="text-danger ">*</span></label>
+                                <div class="input-group">
+                                    <input type="datetime-local"  id="dataFim" name="dataFim" class="form-control">                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                  </div>
+                  <div class="row mb-2">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="qtdPessoas">Quantidade de Participantes: <span class="text-danger ">*</span></label>
+                                <div class="input-group">
+                                    <input type="number"  id="qtdPessoas" name="qtdPessoas" class="form-control"/>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="endereco">Endereço: <span class="text-danger ">*</span></label>
+                                <div class="input-group">
+                                    <input type="text"  id="endereco" name="endereco" class="form-control"/>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="preco">Preço:</label>
+                                <div class="input-group">
+                                    <input type="text" id="preco" placeholder="R$0,00" name="preco" class="form-control"/>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="tipo">Tipo: <span class="text-danger ">*</span></label>
+                            <select class="form-select selectpicker"  aria-label="tipo" id="tipo" name="tipo">
+                                <option value="" selected disabled>Selecione o tipo</option>
+                                <option value="1">Festa Universitária</option>
+                                <option value="2">Palestra</option>
+                            </select>
+                            
+                        </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="descricao">Descrição:</label>
+                            <textarea class="form-control" id="descricao" rows="4" style="resize: none;"></textarea>
+                          </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="salvar">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- incluindo o script de inicialização do calendario -->
     <script src="../assets/js/calendario.js"></script> 
