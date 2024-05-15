@@ -19,6 +19,17 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 }
+  .estrelas input[type=radio] {
+  display: none;
+}
+.estrelas label i.fa:before {
+  content:'\f005';
+  color: #FC0;
+}
+.estrelas input[type=radio]:checked ~ label i.fa:before {
+  color: #CCC;
+}
+
 
 
 
