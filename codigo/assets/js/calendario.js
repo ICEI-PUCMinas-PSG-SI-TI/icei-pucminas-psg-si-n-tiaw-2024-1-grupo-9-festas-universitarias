@@ -268,7 +268,7 @@ function editaEvento(id){
     axios.get(`http://localhost:3000/eventos?id=${id}`)
     .then(function (response) {
          console.log(response.data[0])
-                    
+             
     })
     .catch(function (error) {
       console.log(error);

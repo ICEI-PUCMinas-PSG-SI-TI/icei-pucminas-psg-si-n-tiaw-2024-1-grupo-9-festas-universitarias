@@ -18,7 +18,7 @@
       "dataFim": "2024-05-13T18:55",
       "participantes": "100",
       "endereco": "nke",
-      "preco": "R$ 1,00",
+      "preco": "R$ 1,00",
       "tipo": "2",
       "descricao": ""
     },
@@ -31,6 +31,28 @@
       "endereco": "htetse",
       "preco": "R$ 100,00",
       "tipo": "1",
+      "descricao": ""
+    },
+    {
+      "id": "d5af",
+      "nomeEvento": "Festa PUC São Gabriel",
+      "dataInicio": "2024-05-30T20:47",
+      "dataFim": "2024-05-31T20:47",
+      "participantes": "100",
+      "endereco": "PUC Minas São Gabriel",
+      "preco": "R$ 100,00",
+      "tipo": "1",
+      "descricao": ""
+    },
+    {
+      "id": "8b8f",
+      "nomeEvento": "villani",
+      "dataInicio": "2024-05-10T21:26",
+      "dataFim": "2024-05-11T21:26",
+      "participantes": "100",
+      "endereco": "PUC Minas São Gabriel",
+      "preco": "R$ 20.000,00",
+      "tipo": "2",
       "descricao": ""
     }
   ]
