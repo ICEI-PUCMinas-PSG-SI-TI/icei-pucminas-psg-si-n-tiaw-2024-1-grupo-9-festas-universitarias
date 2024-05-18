@@ -57,19 +57,9 @@
     }
   ],
   "cadastros": [
-    {
-      "id": "6cc3",
-      "nome": {
-        "primeiroNome": "Arthur",
-        "ultimoNome": "Almeida"
-      },
-      "email": "arezendealmeida@gmail.com",
-      "senha": "d41d8cd98f00b204e9800998ecf8427e",
-      "nomeuniversidade": "PUC",
-      "universidadeID": "1234",
-      "TipoUsuario": "organizador",
-      "vinculo": "Aluno",
-      "cpf": "111.111.111-11"
-    }
+
+  ],
+  "logado": [
+   
   ]
 }

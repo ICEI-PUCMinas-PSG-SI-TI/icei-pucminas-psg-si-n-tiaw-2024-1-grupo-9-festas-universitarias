@@ -1,5 +1,33 @@
 $(document).ready(function () {
 
+    const apiUrl = 'http://localhost:3000/logado';
+
+    async function deleteAllLogins() {
+    try {
+        const response = await axios.get(apiUrl);
+        const logins = response.data;
+
+        const deletePromises = logins.map(login => login.delete(`${apiUrl}/${login.id}`));
+        await Promise.all(deletePromises);
+
+    } catch (error) {
+        console.error('Erro ao deletar os registros:', error);
+    }
+}
+
+async function login(dados) {
+    try {
+        await deleteAllLogins();
+
+        const response = await axios.post('http://localhost:3000/logado', dados);
+        window.location.href = 'calendario.html';
+        console.log('Login realizado com sucesso:', response.data);
+    } catch (error) {
+        console.error('Erro ao realizar o login:', error);
+    }
+}
+
+
     //mascara CPF
     $(document).on('input', '#cpf', function() {
         let value = $(this).val();
@@ -85,14 +113,7 @@ $(document).ready(function () {
 
             console.log(DbCadastro);
 
-            swal.fire({
-                title: 'Cadastro realizado com sucesso',
-                icon:'success'
-            }).then((result => {
-                if(result.isConfirmed){
-                    window.location.href = 'calendario.html';
-                }
-            }))
+            
 
             fetch('http://localhost:3000/cadastros', {
                 method: 'POST',
@@ -103,7 +124,16 @@ $(document).ready(function () {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data);       
+                    console.log('Success:', data);   
+                    swal.fire({
+                        title: 'Cadastro realizado com sucesso',
+                        icon:'success',
+                        text:"Você será redirecionado para a página principal"
+                    }).then((result => {
+                        if(result.isConfirmed){
+                            login(DbCadastro)
+                        }
+                    }))    
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -177,5 +207,8 @@ $(document).ready(function () {
             alertDiv.remove();
         }, 3000);
     }
+
+
+   
 
 });
