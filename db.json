@@ -1,0 +1,75 @@
+{
+  "eventos": [
+    {
+      "id": "d554",
+      "nomeEvento": "Calourada PUC",
+      "dataInicio": "2024-05-06T19:00",
+      "dataFim": "2024-05-06T23:59",
+      "participantes": "150",
+      "endereco": "Rua Walter Ianni, 255 - São Gabriel, Belo Horizonte",
+      "preco": "R$30,00",
+      "tipo": "1",
+      "descricao": "Teste cadastro de evento trabalho de diw, festa muito legal, testeeeeeee"
+    },
+    {
+      "id": "f536",
+      "nomeEvento": "teste",
+      "dataInicio": "2024-05-13T18:55",
+      "dataFim": "2024-05-13T18:55",
+      "participantes": "100",
+      "endereco": "nke",
+      "preco": "R$ 1,00",
+      "tipo": "2",
+      "descricao": ""
+    },
+    {
+      "id": "62a0",
+      "nomeEvento": "testeAula",
+      "dataInicio": "2024-05-13T19:55",
+      "dataFim": "2024-05-13T19:55",
+      "participantes": "100",
+      "endereco": "htetse",
+      "preco": "R$ 100,00",
+      "tipo": "1",
+      "descricao": ""
+    },
+    {
+      "id": "d5af",
+      "nomeEvento": "Festa PUC São Gabriel",
+      "dataInicio": "2024-05-30T20:47",
+      "dataFim": "2024-05-31T20:47",
+      "participantes": "100",
+      "endereco": "PUC Minas São Gabriel",
+      "preco": "R$ 100,00",
+      "tipo": "1",
+      "descricao": ""
+    },
+    {
+      "id": "8b8f",
+      "nomeEvento": "villani",
+      "dataInicio": "2024-05-10T21:26",
+      "dataFim": "2024-05-11T21:26",
+      "participantes": "100",
+      "endereco": "PUC Minas São Gabriel",
+      "preco": "R$ 20.000,00",
+      "tipo": "2",
+      "descricao": ""
+    }
+  ],
+  "cadastros": [
+    {
+      "id": "6cc3",
+      "nome": {
+        "primeiroNome": "Arthur",
+        "ultimoNome": "Almeida"
+      },
+      "email": "arezendealmeida@gmail.com",
+      "senha": "d41d8cd98f00b204e9800998ecf8427e",
+      "nomeuniversidade": "PUC",
+      "universidadeID": "1234",
+      "TipoUsuario": "organizador",
+      "vinculo": "Aluno",
+      "cpf": "111.111.111-11"
+    }
+  ]
+}
