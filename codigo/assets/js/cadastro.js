@@ -7,7 +7,7 @@ $(document).ready(function () {
         const response = await axios.get(apiUrl);
         const logins = response.data;
 
-        const deletePromises = logins.map(login => login.delete(`${apiUrl}/${login.id}`));
+        const deletePromises = logins.map(login => axios.delete(`${apiUrl}/${login.id}`));
         await Promise.all(deletePromises);
 
     } catch (error) {

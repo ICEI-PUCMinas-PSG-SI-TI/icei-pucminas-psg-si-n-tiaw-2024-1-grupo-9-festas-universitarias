@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar;
+    buscarUser()
+
 
     buscarEventos()
         .then(eventos => {
@@ -89,7 +91,7 @@ function buscarEventos() {
 
 
 
-$('#salvar').click(function(){
+$('#salvar').click( async function(){
     var request = true
     var nomeEvento = $('#nomeEvento').val()
     var dataInicio = $('#dataInicio').val()
@@ -133,6 +135,14 @@ $('#salvar').click(function(){
         return
     }
 
+    const resposta = await axios.get('http://localhost:3000/logado');
+    const usuario = resposta.data[0].id;
+
+    console.log(usuario);
+
+   
+
+
     const url = 'http://localhost:3000/eventos';
 
     const data = {
@@ -143,6 +153,7 @@ $('#salvar').click(function(){
         endereco,
         preco,
         tipo,
+        usuario,
         descricao
       };
     
@@ -269,6 +280,35 @@ function editaEvento(id){
     .then(function (response) {
          console.log(response.data[0])
              
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+}
+
+async function buscarUser(){
+   await axios.get(`http://localhost:3000/logado`)
+    .then(function (response) {
+         //console.log(response.data[0])
+         let user = response.data[0]
+        $('#usuario').text(`${user.nome.primeiroNome} ${user.nome.ultimoNome}`)
+        if(user.TipoUsuario == "organizador"){
+            $('#lastButton').removeClass('d-none')
+            $('#lastButton').addClass('d-flex')
+            $('#eventoOrganizador').removeClass('d-none')
+            $('#eventoOrganizador').addClass('d-flex')
+            $('#eventoUsuario').removeClass('d-flex')
+            $('#eventoUsuario').addClass('d-none')
+        }else{
+            $('#lastButton').addClass('d-none')
+            $('#lastButton').removeClass('d-flex')
+            $('#eventoUsuario').removeClass('d-none')
+            $('#eventoUsuario').addClass('d-flex')
+            $('#eventoOrganizador').removeClass('d-flex')
+            $('#eventoOrganizador').addClass('d-none')
+            
+        }
+       
     })
     .catch(function (error) {
       console.log(error);
