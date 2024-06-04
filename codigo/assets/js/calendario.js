@@ -97,7 +97,10 @@ $('#salvar').click( async function(){
     var dataInicio = $('#dataInicio').val()
     var dataFim = $('#dataFim').val()
     var participantes = $('#qtdPessoas').val()
-    var endereco = $('#endereco').val()
+    var cep = $('#cep').val().replace("-","")
+    var rua = $('#rua').val()
+    var bairro = $('#bairro').val()
+    var cidade = $('#cidade').val()
     var preco = $('#preco').val()
     var tipo = $('#tipo').val()
     var descricao = $('#descricao').val()
@@ -107,7 +110,7 @@ $('#salvar').click( async function(){
     //     dataInicio,
     //     dataFim,
     //     participantes,
-    //     endereco,
+    //     cep,
     //     preco,
     //     tipo,
     //     descricao
@@ -118,7 +121,7 @@ $('#salvar').click( async function(){
        dataInicio.trim()==""||
        dataFim.trim()==""||
        participantes == ""||
-       endereco.trim()==""||
+       cep.trim()==""||
        tipo == null
     ){
         Swal.fire({
@@ -150,7 +153,10 @@ $('#salvar').click( async function(){
         dataInicio,
         dataFim,
         participantes,
-        endereco,
+        cep,
+        rua,
+        cidade,
+        bairro,
         preco,
         tipo,
         usuario,
@@ -183,7 +189,10 @@ $('#salvar').click( async function(){
                 $('#dataInicio').val("")
                 $('#dataFim').val("")
                 $('#qtdPessoas').val("")
-                $('#endereco').val("")
+                $('#cep').val("")
+                $('#rua').val("")
+                $('#bairro').val("")
+                $('#cidade').val("")
                 $('#preco').val("")
                 $('#tipo').val("")
                 $('#descricao').val("")
@@ -278,8 +287,13 @@ $('#searchInput').keyup(function(){
 function editaEvento(id){
     axios.get(`http://localhost:3000/eventos?id=${id}`)
     .then(function (response) {
-         console.log(response.data[0])
-             
+         let info = response.data[0]
+         console.log(info)
+         $('#nomeEventoInfo').text(info.nomeEvento)
+         $('#descricaoInfo').text(info.descricao)
+         $('#duracaoInfo').text(`${moment(info.dataInicio).format('YYYY/MM/DD [as] HH:mm')} até ${moment(info.dataFim).format('YYYY/MM/DD [as] HH:mm')}`)
+         $("#modalInfoEvento").modal("show");
+
     })
     .catch(function (error) {
       console.log(error);
@@ -314,3 +328,32 @@ async function buscarUser(){
       console.log(error);
     })
 }
+
+
+function mascaraCEP(input) {
+    let value = input.value;
+    value = value.replace(/\D/g, ""); 
+    value = value.replace(/^(\d{5})(\d)/, "$1-$2"); 
+
+    input.value = value;
+}
+
+$('#cep').change(function(){
+    let cep = $(this).val().replace("-","")
+
+    axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(function (response) {
+        
+        console.log(response)
+        let info = response.data
+
+        $('#rua').val(info.logradouro)
+        $('#bairro').val(info.bairro)
+        $('#cidade').val(info.localidade)
+        
+      
+   })
+   .catch(function (error) {
+     console.log(error);
+   })
+})
