@@ -1,19 +1,19 @@
 {
   "eventos": [
     {
-      "id": "3211",
-      "nomeEvento": "RESENHA CASA DOS CRIAS",
-      "dataInicio": "2024-06-07T19:53",
-      "dataFim": "2024-06-08T23:53",
-      "participantes": "100",
-      "cep": "31140020",
-      "rua": "Rua Juruá",
+      "id": "2938",
+      "nomeEvento": "Palestra TIAW",
+      "dataInicio": "2024-06-04T21:05",
+      "dataFim": "2024-06-04T23:05",
+      "participantes": "200",
+      "cep": "31980110",
+      "rua": "Rua Walter Ianni",
       "cidade": "Belo Horizonte",
-      "bairro": "Graça",
+      "bairro": "São Gabriel",
       "preco": "",
-      "tipo": "1",
+      "tipo": "2",
       "usuario": "0682",
-      "descricao": "Resenha na casa do Barcelos, MUITA PUTARIA!!!"
+      "descricao": "Venha participar de uma palestra inspiradora sobre o fascinante mundo da Inteligência Artificial (IA). Nesta sessão, exploraremos as inovações mais recentes, as tendências futuras e as implicações éticas associadas a essa tecnologia revolucionária. A palestra será conduzida por especialistas renomados na área de IA, que compartilharão suas experiências e conhecimentos sobre como a IA está transformando diversos setores."
     }
   ],
   "cadastros": [

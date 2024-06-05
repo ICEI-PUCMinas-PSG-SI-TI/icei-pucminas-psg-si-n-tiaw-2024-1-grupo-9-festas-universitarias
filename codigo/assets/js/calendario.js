@@ -291,7 +291,7 @@ function editaEvento(id){
          console.log(info)
          $('#nomeEventoInfo').text(info.nomeEvento)
          $('#descricaoInfo').text(info.descricao)
-         $('#duracaoInfo').text(`${moment(info.dataInicio).format('YYYY/MM/DD [as] HH:mm')} até ${moment(info.dataFim).format('YYYY/MM/DD [as] HH:mm')}`)
+         $('#duracaoInfo').text(`${moment(info.dataInicio).format('YYYY/MM/DD [às] HH:mm')} até ${moment(info.dataFim).format('YYYY/MM/DD [às] HH:mm')}`)
          $("#modalInfoEvento").modal("show");
 
     })

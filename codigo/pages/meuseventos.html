@@ -84,12 +84,25 @@
                           }else{
                             tipo = "Palestra"
                           }
+                          let valorNumerico
+                          if(evento.preco == ""){
+                            valorNumerico = 0.00
+                          }else{
+                            valorNumerico = parseFloat(evento.preco.replace(',', '.'));
+                          }
+
+                         
+
+                          let valorFormatado = valorNumerico.toLocaleString('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL'
+                          });
                           tbody+= `<tr>
                                 <td>${evento.nomeEvento}</td>
                                 <td class='text-center'>${moment(evento.dataInicio).format("DD/MM/YYYY")}</td>
                                 <td class='text-center'>${moment(evento.dataFim).format("DD/MM/YYYY")}</td>
-                                <td>${evento.endereco}</td>
-                                <td class='text-center'>${evento.preco}</td>
+                                <td>Rua ${evento.rua} - ${evento.bairro} - ${evento.cidade}</td>
+                                <td class='text-center'>${valorFormatado}</td>
                                 <td class='text-end'>${tipo}</td>
                             </tr>`
                         })
