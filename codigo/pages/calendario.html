@@ -255,7 +255,9 @@
                     </div>
                     <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
                         <div id="map" class="border rounded"></div>
+                        <div class="row ps-3" id="local_info">
 
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -286,7 +288,7 @@
 
 var mymap
 
-function ativarQuandoAbaAtivada(lat,lon) {
+function ativarQuandoAbaAtivada(lat,lon,dados) {
     if ($('#modalInfoEvento').find('#location-tab').hasClass('active')) {
 
         if (mymap) {
@@ -301,6 +303,8 @@ function ativarQuandoAbaAtivada(lat,lon) {
 
         // Adicionando marcador
         var marker = L.marker([lat, lon]).addTo(mymap);
+    
+        $('#local_info').text(`${dados.rua} - ${dados.bairro} - ${dados.cidade}`)
 
     }
 }
@@ -332,13 +336,13 @@ function editaEvento(id) {
 
                 let dados = response.data[0]
                 $('#modalInfoEvento').off('shown.bs.modal').on('shown.bs.modal', function () {
-                    ativarQuandoAbaAtivada(dados.lat,dados.lon);
+                    ativarQuandoAbaAtivada(dados.lat,dados.lon,dados);
                 });
 
-                console.log(dados)
+                //console.log(dados)
 
                 $('#modalInfoEvento button[data-bs-toggle="tab"]').off('shown.bs.tab').on('shown.bs.tab', function (e) {
-                    ativarQuandoAbaAtivada(dados.lat,dados.lon);
+                    ativarQuandoAbaAtivada(dados.lat,dados.lon,info);
                 });
             })
 
