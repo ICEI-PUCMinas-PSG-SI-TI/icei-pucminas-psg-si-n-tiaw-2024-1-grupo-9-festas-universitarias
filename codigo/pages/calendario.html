@@ -290,7 +290,7 @@ function ativarQuandoAbaAtivada(lat,lon) {
     if ($('#modalInfoEvento').find('#location-tab').hasClass('active')) {
 
         if (mymap) {
-            mymap.remove(); // Remove o mapa existente, se houver
+            mymap.remove(); 
         }
          mymap = L.map('map').setView([lat, lon], 16);
 
@@ -325,7 +325,7 @@ function editaEvento(id) {
                 $('#precoInfo').text(valorFormatado);
                 $('#box_preco').removeClass('d-none');
             }
-            $("#modalInfoEvento").modal("show");
+            
 
             axios.get(`https://nominatim.openstreetmap.org/search.php?street=${info.rua}&city=${info.cidade}&state=${info.uf}&country=brazil&polygon_geojson=1&format=jsonv2`)
             .then(function(response){
@@ -342,8 +342,8 @@ function editaEvento(id) {
                 });
             })
 
-           
-
+            $("#modalInfoEvento").modal("show");
+            $('#details-tab').click()
 
         })
         .catch(function (error) {
