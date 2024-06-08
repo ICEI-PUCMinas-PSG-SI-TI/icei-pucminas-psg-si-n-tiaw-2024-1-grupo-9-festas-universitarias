@@ -108,7 +108,8 @@ async function login(dados) {
                 universidadeID: $('#universidadeID').val(),
                 TipoUsuario: $('input[name="role"]:checked').val(),
                 vinculo: $('#vinculo').val(),
-                cpf: $('#cpf').val()
+                cpf: $('#cpf').val(),
+                fotoPerfil: ""
             };
 
             console.log(DbCadastro);
