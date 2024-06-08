@@ -21,6 +21,9 @@
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <!-- axios -->
      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+     <!-- inclindo mapa -->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link rel="stylesheet" href="../assets/css/calendar.css">
     <title>Unifest - Calendário</title>
 </head>
@@ -178,7 +181,7 @@
                                 <label for="cidade">Cidade: <span class="text-danger ">*</span></label>
                                 <div class="input-group">
                                     <input type="text"  id="cidade" name="cidade" class="form-control" />
-                                    
+                                    <input type="hidden"  id="uf" name="uf" />
                                 </div>
                             </div>
                         </div>
@@ -237,14 +240,22 @@
                                     Duração do Evento:
                                 </p>
                                 <p id="duracaoInfo">
+                                    
+                                </p>
+                            </div>
+                            <div class="col-lg-3 d-none" id="box_preco">
+                                <p class="fs-5">
+                                    Preço:
+                                </p>
+                                <p id="precoInfo">
 
                                 </p>
                             </div>
                       </div>
                     </div>
                     <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
-                      <h5>Localização</h5>
-                      <p>Aqui estão as informações de localização...</p>
+                        <div id="map" class="border rounded"></div>
+
                     </div>
                   </div>
                 </div>
@@ -254,8 +265,96 @@
               </div>
         </div>
     </div>
-    
-  
+
+
+    <script>
+//  var map;
+
+// function initMap() {
+//     if (!map) { // Verifica se o mapa já foi inicializado
+//         map = L.map('map').setView([-19.8583191, -43.9199056], 16); // São Paulo, Brasil
+//         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//         }).addTo(map);
+
+//         var marker = L.marker([-19.8583191, -43.9199056]).addTo(map)
+//             .openPopup();
+//     } else {
+//         map.invalidateSize(); // Ajusta o tamanho do mapa se já estiver inicializado
+//     }
+// }
+
+var mymap
+
+function ativarQuandoAbaAtivada(lat,lon) {
+    if ($('#modalInfoEvento').find('#location-tab').hasClass('active')) {
+
+        if (mymap) {
+            mymap.remove(); // Remove o mapa existente, se houver
+        }
+         mymap = L.map('map').setView([lat, lon], 16);
+
+        // Adicionando camada de mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+
+        // Adicionando marcador
+        var marker = L.marker([lat, lon]).addTo(mymap);
+
+    }
+}
+
+
+
+function editaEvento(id) {
+    axios.get(`http://localhost:3000/eventos?id=${id}`)
+        .then(function (response) {
+            let info = response.data[0];
+            console.log(info);
+            $('#nomeEventoInfo').text(info.nomeEvento);
+            $('#descricaoInfo').text(info.descricao);
+            $('#duracaoInfo').text(`${moment(info.dataInicio).format('YYYY/MM/DD [às] HH:mm')} até ${moment(info.dataFim).format('YYYY/MM/DD [às] HH:mm')}`);
+            let valorNumerico = parseFloat(info.preco.replace(',', '.'));
+            let valorFormatado = valorNumerico.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            if (info.preco != "") {
+                console.log('teste');
+                $('#precoInfo').text(valorFormatado);
+                $('#box_preco').removeClass('d-none');
+            }
+            $("#modalInfoEvento").modal("show");
+
+            axios.get(`https://nominatim.openstreetmap.org/search.php?street=${info.rua}&city=${info.cidade}&state=${info.uf}&country=brazil&polygon_geojson=1&format=jsonv2`)
+            .then(function(response){
+
+                let dados = response.data[0]
+                $('#modalInfoEvento').off('shown.bs.modal').on('shown.bs.modal', function () {
+                    ativarQuandoAbaAtivada(dados.lat,dados.lon);
+                });
+
+                console.log(dados)
+
+                $('#modalInfoEvento button[data-bs-toggle="tab"]').off('shown.bs.tab').on('shown.bs.tab', function (e) {
+                    ativarQuandoAbaAtivada(dados.lat,dados.lon);
+                });
+            })
+
+           
+
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+
+
+
+    </script>
     <!-- incluindo o script de inicialização do calendario -->
     <script src="../assets/js/calendario.js"></script> 
     <!-- incluindo script bootstrap -->

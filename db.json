@@ -10,10 +10,27 @@
       "rua": "Rua Walter Ianni",
       "cidade": "Belo Horizonte",
       "bairro": "São Gabriel",
-      "preco": "",
+      "uf": "MG",
+      "preco": "100",
       "tipo": "2",
       "usuario": "0682",
       "descricao": "Venha participar de uma palestra inspiradora sobre o fascinante mundo da Inteligência Artificial (IA). Nesta sessão, exploraremos as inovações mais recentes, as tendências futuras e as implicações éticas associadas a essa tecnologia revolucionária. A palestra será conduzida por especialistas renomados na área de IA, que compartilharão suas experiências e conhecimentos sobre como a IA está transformando diversos setores."
+    },
+    {
+      "id": "ec74",
+      "nomeEvento": "Festa teste",
+      "dataInicio": "2024-06-08T15:17",
+      "dataFim": "2024-06-08T15:17",
+      "participantes": "100",
+      "cep": "31140350",
+      "rua": "Rua São Claret",
+      "cidade": "Belo Horizonte",
+      "bairro": "Silveira",
+      "uf": "MG",
+      "preco": "",
+      "tipo": "1",
+      "usuario": "0682",
+      "descricao": "testeeeee"
     }
   ],
   "cadastros": [

@@ -99,6 +99,7 @@ $('#salvar').click( async function(){
     var participantes = $('#qtdPessoas').val()
     var cep = $('#cep').val().replace("-","")
     var rua = $('#rua').val()
+    var uf = $('#uf').val()
     var bairro = $('#bairro').val()
     var cidade = $('#cidade').val()
     var preco = $('#preco').val()
@@ -157,6 +158,7 @@ $('#salvar').click( async function(){
         rua,
         cidade,
         bairro,
+        uf,
         preco,
         tipo,
         usuario,
@@ -284,21 +286,7 @@ $('#searchInput').keyup(function(){
 // })
 
 
-function editaEvento(id){
-    axios.get(`http://localhost:3000/eventos?id=${id}`)
-    .then(function (response) {
-         let info = response.data[0]
-         console.log(info)
-         $('#nomeEventoInfo').text(info.nomeEvento)
-         $('#descricaoInfo').text(info.descricao)
-         $('#duracaoInfo').text(`${moment(info.dataInicio).format('YYYY/MM/DD [às] HH:mm')} até ${moment(info.dataFim).format('YYYY/MM/DD [às] HH:mm')}`)
-         $("#modalInfoEvento").modal("show");
 
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-}
 
 async function buscarUser(){
    await axios.get(`http://localhost:3000/logado`)
@@ -350,10 +338,12 @@ $('#cep').change(function(){
         $('#rua').val(info.logradouro)
         $('#bairro').val(info.bairro)
         $('#cidade').val(info.localidade)
+        $('#uf').val(info.uf)
         
-      
    })
    .catch(function (error) {
      console.log(error);
    })
 })
+
+
