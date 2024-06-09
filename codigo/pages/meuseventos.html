@@ -86,15 +86,16 @@
                                 } else {
                                     tipo = "Palestra"
                                 }
-                                tbody += `<tr>
-                                    <td>${evento.nomeEvento}</td>
-                                    <td class='text-center'>${moment(evento.dataInicio).format("DD/MM/YYYY")}</td>
-                                    <td class='text-center'>${moment(evento.dataFim).format("DD/MM/YYYY")}</td>
-                                    <td>${evento.endereco}</td>
-                                    <td class='text-center'>${evento.preco}</td>
-                                    <td class='text-end'>${tipo}</td>
-                                    <td class='text-end'><button class="btn btn-danger btn-sm delete-btn" data-id="${evento.id}">Excluir</button></td>
-                                </tr>`
+                               
+                                tbody+= `<tr>
+                                <td>${evento.nomeEvento}</td>
+                                <td class='text-center'>${moment(evento.dataInicio).format("DD/MM/YYYY")}</td>
+                                <td class='text-center'>${moment(evento.dataFim).format("DD/MM/YYYY")}</td>
+                                <td>Rua ${evento.rua} - ${evento.bairro} - ${evento.cidade}</td>
+                                <td class='text-center'>${valorFormatado}</td>
+                                <td class='text-end'>${tipo}</td>
+                                <td class='text-end'><button class="btn btn-danger btn-sm delete-btn" data-id="${evento.id}">Excluir</button></td>
+                            </tr>`
                             })
 
                             $('#dados').html(tbody)
