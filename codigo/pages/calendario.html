@@ -21,6 +21,9 @@
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <!-- axios -->
      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+     <!-- inclindo mapa -->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link rel="stylesheet" href="../assets/css/calendar.css">
     <title>Unifest - Calendário</title>
 </head>
@@ -126,15 +129,7 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="endereco">Endereço: <span class="text-danger ">*</span></label>
-                                <div class="input-group">
-                                    <input type="text"  id="endereco" name="endereco" class="form-control"/>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="preco">Preço:</label>
@@ -154,6 +149,44 @@
                             </select>
                             
                         </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="cep">CEP: <span class="text-danger ">*</span></label>
+                                <div class="input-group">
+                                    <input type="text"  id="cep" name="cep" class="form-control" oninput="mascaraCEP(this)"/>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+                  <div class="row mb-2">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="rua">Rua: <span class="text-danger ">*</span></label>
+                                <div class="input-group">
+                                    <input type="text"  id="rua" name="rua" class="form-control" />
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="bairro">Bairro: <span class="text-danger ">*</span></label>
+                                <div class="input-group">
+                                    <input type="text"  id="bairro" name="bairro" class="form-control" />
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="cidade">Cidade: <span class="text-danger ">*</span></label>
+                                <div class="input-group">
+                                    <input type="text"  id="cidade" name="cidade" class="form-control" />
+                                    <input type="hidden"  id="uf" name="uf" />
+                                </div>
+                            </div>
+                        </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-12">
@@ -171,8 +204,181 @@
             </div>
         </div>
     </div>
+
+
+     <!-- Modal info     -->
+
+     <div class="modal fade modal-xl" id="modalInfoEvento" tabindex="-1" aria-labelledby="modalInfoEventoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="eventModalLabel">Informações do Evento</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" id="eventTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="true">Detalhes</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location" type="button" role="tab" aria-controls="location" aria-selected="false">Localização</button>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+                      <div class="row pt-3">
+                            <h2 class="w-100 text-center " id="nomeEventoInfo"></h2>
+                      </div>
+                      <div class="row pt-3">
+                        <p class="w-100 px-3" id="descricaoInfo">
+
+                        </p>
+                      </div>
+                      <div class="row">
+                            <div class="col-lg-6">
+                                <p class="fs-5">
+                                    Duração do Evento:
+                                </p>
+                                <p id="duracaoInfo">
+                                    
+                                </p>
+                            </div>
+                            <div class="col-lg-3 d-none" id="box_preco">
+                                <p class="fs-5">
+                                    Preço:
+                                </p>
+                                <p id="precoInfo">
+
+                                </p>
+                            </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
+                        <div id="map" class="border rounded"></div>
+                        <div class="row ps-3" id="local_info">
+
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <div>
+                        <p class="fs-5">Confirmados:<span id="confirmados"></span></p>
+                    </div>
+                  <div>
+                    <button type="button" class="btn btn-success d-none" id="confirmar">Confirmar Presença</button>
+                    <button type="button" class="btn btn-danger d-none" id="cancelar">Cancelar Presença</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+
+
+    <script>
+//  var map;
+
+// function initMap() {
+//     if (!map) { // Verifica se o mapa já foi inicializado
+//         map = L.map('map').setView([-19.8583191, -43.9199056], 16); // São Paulo, Brasil
+//         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//         }).addTo(map);
+
+//         var marker = L.marker([-19.8583191, -43.9199056]).addTo(map)
+//             .openPopup();
+//     } else {
+//         map.invalidateSize(); // Ajusta o tamanho do mapa se já estiver inicializado
+//     }
+// }
+
+var mymap
+
+function ativarQuandoAbaAtivada(lat,lon,dados) {
+    if ($('#modalInfoEvento').find('#location-tab').hasClass('active')) {
+
+        if (mymap) {
+            mymap.remove(); 
+        }
+         mymap = L.map('map').setView([lat, lon], 16);
+
+        // Adicionando camada de mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+
+        // Adicionando marcador
+        var marker = L.marker([lat, lon]).addTo(mymap);
     
-  
+        $('#local_info').text(`${dados.rua} - ${dados.bairro} - ${dados.cidade}`)
+
+    }
+}
+
+
+
+function editaEvento(id) {
+    axios.get(`http://localhost:3000/eventos?id=${id}`)
+        .then(function (response) {
+            let info = response.data[0];
+            console.log(info);
+            $('#nomeEventoInfo').text(info.nomeEvento);
+            $('#descricaoInfo').text(info.descricao);
+            $('#duracaoInfo').text(`${moment(info.dataInicio).format('YYYY/MM/DD [às] HH:mm')} até ${moment(info.dataFim).format('YYYY/MM/DD [às] HH:mm')}`);
+            let valorNumerico = parseFloat(info.preco.replace(',', '.'));
+            let valorFormatado = valorNumerico.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            if (info.preco != "") {
+                console.log('teste');
+                $('#precoInfo').text(valorFormatado);
+                $('#box_preco').removeClass('d-none');
+            }
+            if(info.confirmados.length >= info.participantes){
+                $('#confirmar').attr('disabled',true)
+            }
+            $('#confirmados').text(` ${info.confirmados.length}/${info.participantes}`)
+            $('#confirmar').attr('evento',id)
+            $('#cancelar').attr('evento',id)
+            var userId = $('#confirmar').attr('user')
+
+            if(info.confirmados.includes(userId)){
+                $('#confirmar').addClass('d-none')
+                $('#cancelar').removeClass('d-none')
+            }
+
+            axios.get(`https://nominatim.openstreetmap.org/search.php?street=${info.rua}&city=${info.cidade}&county=${info.bairro}&state=${info.uf}&country=brazil&polygon_geojson=1&format=jsonv2`)
+            .then(function(response){
+
+                let dados = response.data[0]
+                $('#modalInfoEvento').off('shown.bs.modal').on('shown.bs.modal', function () {
+                    ativarQuandoAbaAtivada(dados.lat,dados.lon,dados);
+                });
+
+                //console.log(dados)
+
+                $('#modalInfoEvento button[data-bs-toggle="tab"]').off('shown.bs.tab').on('shown.bs.tab', function (e) {
+                    ativarQuandoAbaAtivada(dados.lat,dados.lon,info);
+                });
+            })
+
+            $("#modalInfoEvento").modal("show");
+            $('#details-tab').click()
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+
+
+
+    </script>
     <!-- incluindo o script de inicialização do calendario -->
     <script src="../assets/js/calendario.js"></script> 
     <!-- incluindo script bootstrap -->

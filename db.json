@@ -1,29 +1,78 @@
 {
   "eventos": [
     {
-      "id": "ad74",
+      "id": "2938",
+      "nomeEvento": "Palestra TIAW",
+      "dataInicio": "2024-06-04T21:05",
+      "dataFim": "2024-06-04T23:05",
+      "participantes": "200",
+      "confirmados": [],
+      "cep": "31980110",
+      "rua": "Rua Walter Ianni",
+      "cidade": "Belo Horizonte",
+      "bairro": "São Gabriel",
+      "uf": "MG",
+      "preco": "100.00",
+      "tipo": "2",
+      "usuario": "0682",
+      "descricao": "Venha participar de uma palestra inspiradora sobre o fascinante mundo da Inteligência Artificial (IA). Nesta sessão, exploraremos as inovações mais recentes, as tendências futuras e as implicações éticas associadas a essa tecnologia revolucionária. A palestra será conduzida por especialistas renomados na área de IA, que compartilharão suas experiências e conhecimentos sobre como a IA está transformando diversos setores."
+    },
+    {
+      "id": "695d",
+      "nomeEvento": "Evento teste",
+      "dataInicio": "2024-06-08T16:04",
+      "dataFim": "2024-06-08T16:04",
+      "participantes": "100",
+      "confirmados": [],
+      "cep": "30170131",
+      "rua": "Rua São Paulo",
+      "cidade": "Belo Horizonte",
+      "bairro": "Centro",
+      "uf": "MG",
+      "preco": " 10.00",
+      "tipo": "1",
+      "usuario": "0682",
+      "descricao": "testeeee"
+    }
+  ],
+  "cadastros": [
+    {
+      "id": "4325",
       "nome": {
         "primeiroNome": "Arthur",
-        "ultimoNome": "Almeida"
+        "ultimoNome": "Rezende"
       },
       "email": "teste@gmail",
       "senha": "d41d8cd98f00b204e9800998ecf8427e",
-      "nomeuniversidade": "puc",
+      "nomeuniversidade": "PUC",
       "universidadeID": "1234",
-      "TipoUsuario": "participante",
-      "fotoPerfil:": ""
+      "TipoUsuario": "organizador",
+      "vinculo": "Aluno",
+      "cpf": "111.111.111-11"
+    },
+    {
+      "id": "04da",
+      "nome": {
+        "primeiroNome": "Arthur",
+        "ultimoNome": "teste"
+      },
+      "email": "teste@gmail",
+      "senha": "d41d8cd98f00b204e9800998ecf8427e",
+      "nomeuniversidade": "PUC",
+      "universidadeID": "1234",
+      "TipoUsuario": "participante"
     }
   ],
   "logado": [
     {
-      "id": "ad74",
+      "id": "d1a5",
       "nome": {
         "primeiroNome": "Arthur",
-        "ultimoNome": "Almeida"
+        "ultimoNome": "teste"
       },
       "email": "teste@gmail",
       "senha": "d41d8cd98f00b204e9800998ecf8427e",
-      "nomeuniversidade": "puc",
+      "nomeuniversidade": "PUC",
       "universidadeID": "1234",
       "TipoUsuario": "participante"
     }
