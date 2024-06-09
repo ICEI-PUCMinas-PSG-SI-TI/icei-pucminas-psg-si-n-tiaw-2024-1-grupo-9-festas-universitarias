@@ -86,6 +86,19 @@
                                 } else {
                                     tipo = "Palestra"
                                 }
+                                let valorNumerico
+                                  if(evento.preco == ""){
+                                    valorNumerico = 0.00
+                                  }else{
+                                    valorNumerico = parseFloat(evento.preco.replace(',', '.'));
+                                  }
+
+                                
+
+                                  let valorFormatado = valorNumerico.toLocaleString('pt-BR', {
+                                      style: 'currency',
+                                      currency: 'BRL'
+                                  });
                                
                                 tbody+= `<tr>
                                 <td>${evento.nomeEvento}</td>
