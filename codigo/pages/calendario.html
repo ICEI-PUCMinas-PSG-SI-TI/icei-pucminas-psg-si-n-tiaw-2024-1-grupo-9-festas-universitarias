@@ -261,8 +261,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <div class="modal-footer d-flex justify-content-between">
+                    <div>
+                        <p class="fs-5">Confirmados:<span id="confirmados"></span></p>
+                    </div>
+                  <div>
+                    <button type="button" class="btn btn-success d-none" id="confirmar">Confirmar Presença</button>
+                    <button type="button" class="btn btn-danger d-none" id="cancelar">Cancelar Presença</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  </div>
                 </div>
               </div>
         </div>
@@ -329,9 +336,20 @@ function editaEvento(id) {
                 $('#precoInfo').text(valorFormatado);
                 $('#box_preco').removeClass('d-none');
             }
-            
+            if(info.confirmados.length >= info.participantes){
+                $('#confirmar').attr('disabled',true)
+            }
+            $('#confirmados').text(` ${info.confirmados.length}/${info.participantes}`)
+            $('#confirmar').attr('evento',id)
+            $('#cancelar').attr('evento',id)
+            var userId = $('#confirmar').attr('user')
 
-            axios.get(`https://nominatim.openstreetmap.org/search.php?street=${info.rua}&city=${info.cidade}&state=${info.uf}&country=brazil&polygon_geojson=1&format=jsonv2`)
+            if(info.confirmados.includes(userId)){
+                $('#confirmar').addClass('d-none')
+                $('#cancelar').removeClass('d-none')
+            }
+
+            axios.get(`https://nominatim.openstreetmap.org/search.php?street=${info.rua}&city=${info.cidade}&county=${info.bairro}&state=${info.uf}&country=brazil&polygon_geojson=1&format=jsonv2`)
             .then(function(response){
 
                 let dados = response.data[0]

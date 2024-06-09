@@ -102,7 +102,7 @@ $('#salvar').click( async function(){
     var uf = $('#uf').val()
     var bairro = $('#bairro').val()
     var cidade = $('#cidade').val()
-    var preco = $('#preco').val()
+    var preco = $('#preco').val().replace("R$","").replace(",",".")
     var tipo = $('#tipo').val()
     var descricao = $('#descricao').val()
 
@@ -154,6 +154,7 @@ $('#salvar').click( async function(){
         dataInicio,
         dataFim,
         participantes,
+        confirmados: [],
         cep,
         rua,
         cidade,
@@ -294,6 +295,7 @@ async function buscarUser(){
          //console.log(response.data[0])
          let user = response.data[0]
         $('#usuario').text(`${user.nome.primeiroNome} ${user.nome.ultimoNome}`)
+        
         if(user.TipoUsuario == "organizador"){
             $('#lastButton').removeClass('d-none')
             $('#lastButton').addClass('d-flex')
@@ -308,7 +310,9 @@ async function buscarUser(){
             $('#eventoUsuario').addClass('d-flex')
             $('#eventoOrganizador').removeClass('d-flex')
             $('#eventoOrganizador').addClass('d-none')
-            
+            $('#confirmar').removeClass("d-none")
+            $('#confirmar').attr("user",user.id)
+            $('#cancelar').attr("user",user.id)
         }
        
     })
@@ -346,4 +350,119 @@ $('#cep').change(function(){
    })
 })
 
+$('#confirmar').click(function(){
+    let id = $(this).attr('evento');
+    let userId = $(this).attr('user');
+    axios.get(`http://localhost:3000/eventos?id=${id}`)
+    .then(function(response){
+        if(response.data.length > 0) {
+            let evento = response.data[0];
+            let confirmados = evento.confirmados;
+            if(confirmados.length < evento.participantes && !confirmados.includes(userId)){
+                confirmados.push(userId);
+                axios.patch(`http://localhost:3000/eventos/${id}`, {
+                    confirmados: confirmados
+                })
+                .then(function(response){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso!',
+                        text: 'Presença confirmada!',
+                        showConfirmButton: false
+                    });
+                    $('#confirmar').addClass("d-none");
+                    $('#cancelar').removeClass("d-none");
+                    editaEvento(id)
+                })
+                .catch(function(error){
+                    console.error("Erro no PATCH:", error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                        text: 'Ocorreu um erro ao confirmar presença.',
+                        showConfirmButton: false
+                    });
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Limite de participantes atingido!',
+                    showConfirmButton: false
+                });
+            }
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Evento não encontrado.',
+                showConfirmButton: false
+            });
+        }
+    })
+    .catch(function(error){
+        console.error("Erro no GET:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Ocorreu um erro ao obter os dados do evento.',
+            showConfirmButton: false
+        });
+    });
+});
 
+
+$('#cancelar').click(function(){
+    let id = $(this).attr('evento');
+    let userId = $(this).attr('user');
+    axios.get(`http://localhost:3000/eventos?id=${id}`)
+    .then(function(response){
+        if (response.data.length > 0) {
+            var evento = response.data[0];
+            let confirmados = evento.confirmados;
+            let index = confirmados.indexOf(userId);
+            if (index > -1) {
+                confirmados.splice(index, 1);
+            }
+            axios.patch(`http://localhost:3000/eventos/${id}`, {
+                confirmados: confirmados
+            })
+            .then(function(response){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Presença cancelada!',
+                    showConfirmButton: false
+                });
+                $('#cancelar').addClass("d-none");
+                $('#confirmar').removeClass("d-none");
+                editaEvento(id);
+            })
+            .catch(function(error){
+                console.error("Erro no PATCH:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao cancelar presença.',
+                    showConfirmButton: false
+                });
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Evento não encontrado.',
+                showConfirmButton: false
+            });
+        }
+    })
+    .catch(function(error){
+        console.error("Erro no GET:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Ocorreu um erro ao obter os dados do evento.',
+            showConfirmButton: false
+        });
+    });
+});
