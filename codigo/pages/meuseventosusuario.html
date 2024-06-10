@@ -51,29 +51,71 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">Nome do Evento</th>
-                <th scope="col">Data de Início</th>
-                <th scope="col">Data de Encerramento</th>
-                <th scope="col">Endereço</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Tipo</th>
+                <th scope="col" class='text-start'>Nome do Evento</th>
+                    <th scope="col" class='text-center'>Data de Início</th>
+                    <th scope="col" class='text-center'>Data de Encerramento</th>
+                    <th scope="col" class='text-center'>Endereço</th>
+                    <th scope="col" class='text-center'>Preço</th>
+                <th scope="col " class='text-end'>Tipo</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Calourada</td>
-                <td>14/05/2024</td>
-                <td>15/05/2024</td>
-                <td>Puc-Minas</td>
-                <td>R$100,00</td>
-                <td>Festa Universitária</td>
-                </tr>
-              <tr>
-              </tr>
-              <tr>
+            <tbody id="tbody">
+              
             </tbody>
           </table>
     </div>
+    <script>
+        $(document).ready(function(){
+          var user = JSON.parse(localStorage.getItem("user"))
+          $('#usuario').text(`${user.nome.primeiroNome} ${user.nome.ultimoNome}`)
+          axios.get(`http://localhost:3000/eventos`)
+          .then(function(response){
+            let html = ""
+            let eventos = response.data
+            let confirmados = []
+            eventos.forEach( evento => {
+                if(evento.confirmados.includes(user.id)){
+                    confirmados.push(evento)
+                }
+            });
+
+            
+
+            confirmados.forEach( evento =>{
+              let tipo = ""
+                                if (evento.tipo == 1) {
+                                    tipo = "Festa Universitária"
+                                } else {
+                                    tipo = "Palestra"
+                                }
+
+              let valorNumerico
+                                  if(evento.preco == ""){
+                                    valorNumerico = 0.00
+                                  }else{
+                                    valorNumerico = parseFloat(evento.preco.replace(',', '.'));
+                                  }
+
+                                
+
+                                  let valorFormatado = valorNumerico.toLocaleString('pt-BR', {
+                                      style: 'currency',
+                                      currency: 'BRL'
+                                  });
+                html +=  `<tr>
+                                <td>${evento.nomeEvento}</td>
+                                <td class='text-center'>${moment(evento.dataInicio).format("DD/MM/YYYY")}</td>
+                                <td class='text-center'>${moment(evento.dataFim).format("DD/MM/YYYY")}</td>
+                                <td class='text-center'>Rua ${evento.rua} - ${evento.bairro} - ${evento.cidade}</td>
+                                <td class='text-center'>${valorFormatado}</td>
+                                <td class='text-end'>${tipo}</td>
+                            </tr>`     
+            })
+            console.log(user)
+            $('#tbody').html(html)
+          })
+        })
+    </script>
 </body>
 
 </html>

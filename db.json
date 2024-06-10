@@ -6,7 +6,9 @@
       "dataInicio": "2024-06-04T21:05",
       "dataFim": "2024-06-04T23:05",
       "participantes": "200",
-      "confirmados": [],
+      "confirmados": [
+        "ac83"
+      ],
       "cep": "31980110",
       "rua": "Rua Walter Ianni",
       "cidade": "Belo Horizonte",
@@ -51,32 +53,45 @@
       "cpf": "111.111.111-11"
     },
     {
-      "id": "04da",
+      "id": "77e5",
       "nome": {
         "primeiroNome": "Arthur",
-        "ultimoNome": "teste"
+        "ultimoNome": "TESTE"
       },
       "email": "teste@gmail",
       "senha": "d41d8cd98f00b204e9800998ecf8427e",
       "nomeuniversidade": "PUC",
       "universidadeID": "1234",
-      "TipoUsuario": "participante"
+      "TipoUsuario": "participante",
+      "fotoPerfil": ""
+    },
+    {
+      "id": "ac83",
+      "nome": {
+        "primeiroNome": "Arthur",
+        "ultimoNome": "Almeida"
+      },
+      "email": "teste@gmail",
+      "senha": "d41d8cd98f00b204e9800998ecf8427e",
+      "nomeuniversidade": "PUC",
+      "universidadeID": "1234",
+      "TipoUsuario": "participante",
+      "fotoPerfil": ""
     }
   ],
   "logado": [
     {
-      "id": "4325",
+      "id": "ac83",
       "nome": {
         "primeiroNome": "Arthur",
-        "ultimoNome": "Rezende"
+        "ultimoNome": "Almeida"
       },
       "email": "teste@gmail",
       "senha": "d41d8cd98f00b204e9800998ecf8427e",
       "nomeuniversidade": "PUC",
       "universidadeID": "1234",
-      "TipoUsuario": "organizador",
-      "vinculo": "Aluno",
-      "cpf": "111.111.111-11"
+      "TipoUsuario": "participante",
+      "fotoPerfil": ""
     }
   ]
 }

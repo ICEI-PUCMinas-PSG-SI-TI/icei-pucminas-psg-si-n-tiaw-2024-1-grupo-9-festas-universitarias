@@ -18,7 +18,7 @@ $(document).ready(function () {
 async function login(dados) {
     try {
         await deleteAllLogins();
-
+        localStorage.setItem("user",JSON.stringify(dados))
         const response = await axios.post('http://localhost:3000/logado', dados);
         window.location.href = 'calendario.html';
         console.log('Login realizado com sucesso:', response.data);
@@ -132,7 +132,7 @@ async function login(dados) {
                         text:"Você será redirecionado para a página principal"
                     }).then((result => {
                         if(result.isConfirmed){
-                            login(DbCadastro)
+                            login(data)
                         }
                     }))    
                 })
