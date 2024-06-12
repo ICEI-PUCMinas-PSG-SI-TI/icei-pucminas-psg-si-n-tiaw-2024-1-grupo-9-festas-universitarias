@@ -83,15 +83,14 @@
     {
       "id": "ac83",
       "nome": {
-        "primeiroNome": "Arthur",
-        "ultimoNome": "Almeida"
+        "primeiroNome": "Thiago",
+        "ultimoNome": "TesteEdit"
       },
-      "email": "teste@gmail",
+      "email": "EmailEditTeste@gmail.com",
       "senha": "d41d8cd98f00b204e9800998ecf8427e",
       "nomeuniversidade": "PUC",
       "universidadeID": "1234",
-      "TipoUsuario": "participante",
-      "fotoPerfil": ""
+      "TipoUsuario": "participante"
     }
   ]
 }
