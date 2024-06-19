@@ -43,7 +43,7 @@ $(document).ready(function() {
 $('#preco').change(function(){
     let valor = $(this).val().replace(/[^\d,]/g, '');
     
-    let valorNumerico = parseFloat(valor.replace(',', '.'));
+    let valorNumerico = parseFloat(valor.replace('.','').replace(',', '.'));
 
     let valorFormatado = valorNumerico.toLocaleString('pt-BR', {
         style: 'currency',
@@ -108,7 +108,7 @@ $('#salvar').click( async function(){
     var uf = $('#uf').val()
     var bairro = $('#bairro').val()
     var cidade = $('#cidade').val()
-    var preco = $('#preco').val().replace("R$","").replace(",",".")
+    var preco = $('#preco').val().replace("R$","")
     var tipo = $('#tipo').val()
     var descricao = $('#descricao').val()
 

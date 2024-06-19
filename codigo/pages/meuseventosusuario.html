@@ -93,7 +93,7 @@
                                   if(evento.preco == ""){
                                     valorNumerico = 0.00
                                   }else{
-                                    valorNumerico = parseFloat(evento.preco.replace(',', '.'));
+                                    valorNumerico = parseFloat(evento.preco.replace('.','').replace(',', '.'));
                                   }
 
                                 

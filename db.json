@@ -14,27 +14,10 @@
       "cidade": "Belo Horizonte",
       "bairro": "São Gabriel",
       "uf": "MG",
-      "preco": "100.00",
+      "preco": "100,00",
       "tipo": "2",
       "usuario": "4325",
       "descricao": "Venha participar de uma palestra inspiradora sobre o fascinante mundo da Inteligência Artificial (IA). Nesta sessão, exploraremos as inovações mais recentes, as tendências futuras e as implicações éticas associadas a essa tecnologia revolucionária. A palestra será conduzida por especialistas renomados na área de IA, que compartilharão suas experiências e conhecimentos sobre como a IA está transformando diversos setores."
-    },
-    {
-      "id": "965e",
-      "nomeEvento": "RESENHA QA",
-      "dataInicio": "2024-06-14T13:56",
-      "dataFim": "2024-06-15T13:56",
-      "participantes": "300",
-      "confirmados": [],
-      "cep": "33930220",
-      "rua": "Rua São Tomé",
-      "cidade": "Ribeirão das Neves",
-      "bairro": "Maria Helena (Justinópolis)",
-      "uf": "MG",
-      "preco": " 1.000.00",
-      "tipo": "1",
-      "usuario": "4325",
-      "descricao": "só é permitida entrada de qas"
     }
   ],
   "cadastros": [
@@ -93,6 +76,15 @@
       "TipoUsuario": "organizador",
       "vinculo": "Aluno",
       "cpf": "111.111.111-11"
+    }
+  ],
+  "notificacao": [
+    {
+      "id": "b147",
+      "mensagem": "O evento \"RESENHA QA\" foi cancelado, logo sua confirmação foi retirada!",
+      "users": [
+        "ac83"
+      ]
     }
   ]
 }

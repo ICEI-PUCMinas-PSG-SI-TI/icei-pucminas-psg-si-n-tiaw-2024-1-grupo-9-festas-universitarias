@@ -90,7 +90,7 @@
                                   if(evento.preco == ""){
                                     valorNumerico = 0.00
                                   }else{
-                                    valorNumerico = parseFloat(evento.preco.replace(',', '.'));
+                                    valorNumerico = parseFloat(evento.preco.replace('.','').replace(',', '.'));
                                   }
 
                                 
@@ -127,27 +127,43 @@
                                     cancelButtonText: 'Cancelar'
                                 }).then(function(result) {
                                     if (result.isConfirmed) {
-                                        
-                                        axios.delete(`http://localhost:3000/eventos/${id}`)
-                                            .then(function(response) {
-                                                Swal.fire({
-                                                   title: 'Sucesso!',
-                                                    text: 'Evento excluído com sucesso!',
-                                                    icon:'success',
-                                                    showConfirmButton: true
-                                                }
-                                                )
-                                                .then(function(result){
-                                                    location.reload()
-                                                })
+                                        axios.get(`http://localhost:3000/eventos/${id}`)
+                                        .then(function(response){
+                                            dados = response.data
+
+                                            
+                                            let nomeEvento = dados.nomeEvento
+                                            let mensagem  = `O evento "${nomeEvento}" foi cancelado, logo sua confirmação foi retirada!`
+                                            let users = dados.confirmados
+
+                                            axios.post(`http://localhost:3000/notificacao`,{
+                                                mensagem,
+                                                users
+                                            }).then(function(response){
+                                                axios.delete(`http://localhost:3000/eventos/${id}`)
+                                                    .then(function(response) {
+                                                        Swal.fire({
+                                                        title: 'Sucesso!',
+                                                            text: 'Evento excluído com sucesso!',
+                                                            icon:'success',
+                                                            showConfirmButton: true
+                                                        }
+                                                        )
+                                                        .then(function(result){
+                                                            location.reload()
+                                                        })
+                                                    })
+                                                    .catch(function(error) {
+                                                        Swal.fire(
+                                                            'Erro!',
+                                                            'Houve um problema ao deletar o evento.',
+                                                            'error'
+                                                        );
+                                                    });
                                             })
-                                            .catch(function(error) {
-                                                Swal.fire(
-                                                    'Erro!',
-                                                    'Houve um problema ao deletar o evento.',
-                                                    'error'
-                                                );
-                                            });
+
+                                        })
+                                       
                                     }
                                 })
                             })
