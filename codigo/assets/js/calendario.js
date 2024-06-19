@@ -18,7 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 events: eventos,
                 height: 'auto',
                 aspectRatio: 1.5,
-                locale: 'pt-br'
+                locale: 'pt-br',
+                eventClick: function(arg){
+                    chamaEvento(arg.event.title)
+                },
+                eventClassNames: function() {
+                    return ['custom-event'];
+                }
             });
 
             calendar.render();
@@ -466,3 +472,12 @@ $('#cancelar').click(function(){
         });
     });
 });
+
+function chamaEvento(nome){
+    axios.get(`http://localhost:3000/eventos?nomeEvento=${nome}`)
+    .then(function(response){
+        let evento = response.data[0]
+        editaEvento(evento.id)
+    })
+}
+

@@ -46,7 +46,7 @@
     <div class="container d-flex justify-content-center mt-3 border border-2 rounded p-5 flex-column main">
         <div class="d-flex justify-content-between w-100 mb-3">
             <h2> Meus Eventos</h2>
-            <button class="btn rounded-pill btn-primary">Criar Novo </button>
+            
         </div>
         <table class="table">
             <thead>
@@ -107,47 +107,64 @@
                                 <td>Rua ${evento.rua} - ${evento.bairro} - ${evento.cidade}</td>
                                 <td class='text-center'>${valorFormatado}</td>
                                 <td class='text-end'>${tipo}</td>
-                                <td class='text-end'><button class="btn btn-danger btn-sm delete-btn" data-id="${evento.id}">Excluir</button></td>
+                                <td class='text-end'><button class="btn btn-danger btn-sm delete-btn" nome="${evento.nomeEvento}" idEvento="${evento.id}"><i class="bi bi-trash"></i></button></td>
                             </tr>`
                             })
 
                             $('#dados').html(tbody)
 
                             // Adicionar evento de clique para os botões de excluir
-                            $('.delete-btn').on('click', function () {
-                                const id = $(this).data('id');
-                                axios.delete(`http://localhost:3000/eventos/${id}`)
-                                    .then(function (response) {
-                                        Swal.fire(
-                                            'Deletado!',
-                                            'O evento foi deletado com sucesso.',
-                                            'success'
-                                        ).then(() => {
-                                            location.reload(); // Recarrega a página após a exclusão
-                                        });
-                                    })
-                                    .catch(function (error) {
-                                        Swal.fire(
-                                            'Erro!',
-                                            'Houve um problema ao deletar o evento.',
-                                            'error'
-                                        );
-                                    });
-                            });
+                            $('.delete-btn').click(function() {
+                                let nome = $(this).attr("nome")
+                                let id = $(this).attr("idEvento")
+                                Swal.fire({
+                                    title: `Deseja excluir o evento "${nome}"?`,
+                                    text: `Essa é uma ação irreversível, ao excluir o evento ele não poderá ser recuperado`,
+                                    icon: "warning",
+                                    showConfirmButton: true,
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Sim, excluir',
+                                    cancelButtonText: 'Cancelar'
+                                }).then(function(result) {
+                                    if (result.isConfirmed) {
+                                        
+                                        axios.delete(`http://localhost:3000/eventos/${id}`)
+                                            .then(function(response) {
+                                                Swal.fire({
+                                                   title: 'Sucesso!',
+                                                    text: 'Evento excluído com sucesso!',
+                                                    icon:'success',
+                                                    showConfirmButton: true
+                                                }
+                                                )
+                                                .then(function(result){
+                                                    location.reload()
+                                                })
+                                            })
+                                            .catch(function(error) {
+                                                Swal.fire(
+                                                    'Erro!',
+                                                    'Houve um problema ao deletar o evento.',
+                                                    'error'
+                                                );
+                                            });
+                                    }
+                                })
+                            })
+                               
+                            
+                        });
                         })
-                        .catch(function (error) {
-                            console.log(error);
-                        })
+
+                      
 
                 })
-                .catch(function (error) {
-                    console.log(error);
-                })
+                
 
 
 
 
-        })
+        
     </script>
 </body>
 
