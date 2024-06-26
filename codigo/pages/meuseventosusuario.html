@@ -27,6 +27,23 @@
     <title>Unifest - Calendário</title>
 </head>
 
+<style>
+  .notification-btn {
+      position: relative;
+  }
+
+  .notification-btn .notification-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 15px;
+      height: 15px;
+      background-color: red;
+      border-radius: 50%;
+      border: 2px solid white; /* Opcional: borda branca para melhor contraste */
+  }
+</style>
+
 <body id="color">
     
     <div class="container d-flex justify-content-center mt-3">
@@ -46,7 +63,10 @@
     <div class="container d-flex justify-content-center mt-3 border border-2 rounded p-5 flex-column main">
         <div class="d-flex justify-content-between w-100 mb-3">
             <h2> Painel Eventos</h2>
-            <button class="btn rounded-pill btn-primary">Notificação </button>
+            <button class="btn rounded-pill btn-primary notification-btn">
+              <i class="bi bi-bell fs-5"></i>
+              <span class="notification-badge d-none" id="noti"></span>
+          </button>
         </div>
         <table class="table">
             <thead>
@@ -114,7 +134,24 @@
             console.log(user)
             $('#tbody').html(html)
           })
-        })
+
+
+          axios.get('http://localhost:3000/notificacao')
+          .then(response => {
+            const notifica = response.data.filter(notificacao => 
+              notificacao.users.includes(user.id)&& 
+              !notificacao.lido.includes(user.id)
+            );
+            console.log(notifica)
+
+            if(notifica.length > 0){
+              $('#noti').removeClass("d-none")
+            }
+          })
+          .catch(error => {
+            console.error('Houve um erro ao buscar os dados:', error);
+          });  
+      })
     </script>
 </body>
 

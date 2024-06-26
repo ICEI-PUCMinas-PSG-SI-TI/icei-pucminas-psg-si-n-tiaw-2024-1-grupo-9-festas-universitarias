@@ -64,23 +64,23 @@
   ],
   "logado": [
     {
-      "id": "4325",
+      "id": "ac83",
       "nome": {
         "primeiroNome": "Arthur",
-        "ultimoNome": "Rezende"
+        "ultimoNome": "Almeida"
       },
       "email": "teste@gmail",
       "senha": "d41d8cd98f00b204e9800998ecf8427e",
       "nomeuniversidade": "PUC",
       "universidadeID": "1234",
-      "TipoUsuario": "organizador",
-      "vinculo": "Aluno",
-      "cpf": "111.111.111-11"
+      "TipoUsuario": "participante",
+      "fotoPerfil": ""
     }
   ],
   "notificacao": [
     {
       "id": "b147",
+      "lido": [],
       "mensagem": "O evento \"RESENHA QA\" foi cancelado, logo sua confirmação foi retirada!",
       "users": [
         "ac83"

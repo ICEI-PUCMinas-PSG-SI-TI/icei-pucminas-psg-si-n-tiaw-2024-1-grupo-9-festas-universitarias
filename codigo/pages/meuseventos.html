@@ -137,6 +137,7 @@
                                             let users = dados.confirmados
 
                                             axios.post(`http://localhost:3000/notificacao`,{
+                                                "lido": [],
                                                 mensagem,
                                                 users
                                             }).then(function(response){
