@@ -139,7 +139,9 @@
                                             axios.post(`http://localhost:3000/notificacao`,{
                                                 "lido": [],
                                                 mensagem,
-                                                users
+                                                users,
+                                                "data": moment().format('DD/MM/YYYY')
+
                                             }).then(function(response){
                                                 axios.delete(`http://localhost:3000/eventos/${id}`)
                                                     .then(function(response) {

@@ -80,11 +80,14 @@
   "notificacao": [
     {
       "id": "b147",
-      "lido": [],
+      "lido": [
+        
+      ],
       "mensagem": "O evento \"RESENHA QA\" foi cancelado, logo sua confirmação foi retirada!",
       "users": [
         "ac83"
-      ]
+      ],
+      "data": "26/06/2024"
     }
   ]
 }
