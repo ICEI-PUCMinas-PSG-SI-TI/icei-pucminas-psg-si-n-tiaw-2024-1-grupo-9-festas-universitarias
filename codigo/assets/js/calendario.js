@@ -18,7 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 events: eventos,
                 height: 'auto',
                 aspectRatio: 1.5,
-                locale: 'pt-br'
+                locale: 'pt-br',
+                eventClick: function(arg){
+                    chamaEvento(arg.event.title)
+                },
+                eventClassNames: function() {
+                    return ['custom-event'];
+                }
             });
 
             calendar.render();
@@ -37,7 +43,7 @@ $(document).ready(function() {
 $('#preco').change(function(){
     let valor = $(this).val().replace(/[^\d,]/g, '');
     
-    let valorNumerico = parseFloat(valor.replace(',', '.'));
+    let valorNumerico = parseFloat(valor.replace('.','').replace(',', '.'));
 
     let valorFormatado = valorNumerico.toLocaleString('pt-BR', {
         style: 'currency',
@@ -102,7 +108,7 @@ $('#salvar').click( async function(){
     var uf = $('#uf').val()
     var bairro = $('#bairro').val()
     var cidade = $('#cidade').val()
-    var preco = $('#preco').val().replace("R$","").replace(",",".")
+    var preco = $('#preco').val().replace("R$","")
     var tipo = $('#tipo').val()
     var descricao = $('#descricao').val()
 
@@ -466,3 +472,12 @@ $('#cancelar').click(function(){
         });
     });
 });
+
+function chamaEvento(nome){
+    axios.get(`http://localhost:3000/eventos?nomeEvento=${nome}`)
+    .then(function(response){
+        let evento = response.data[0]
+        editaEvento(evento.id)
+    })
+}
+
