@@ -1,35 +1,35 @@
 $(document).ready(function () {
 
-    const apiUrl = 'http://localhost:3000/logado';
+    // const apiUrl = 'http://localhost:3000/logado';
 
-    async function deleteAllLogins() {
-    try {
-        const response = await axios.get(apiUrl);
-        const logins = response.data;
+    // async function deleteAllLogins() {
+    //     try {
+    //         const response = await axios.get(apiUrl);
+    //         const logins = response.data;
 
-        const deletePromises = logins.map(login => axios.delete(`${apiUrl}/${login.id}`));
-        await Promise.all(deletePromises);
+    //         const deletePromises = logins.map(login => axios.delete(`${apiUrl}/${login.id}`));
+    //         await Promise.all(deletePromises);
 
-    } catch (error) {
-        console.error('Erro ao deletar os registros:', error);
-    }
-}
+    //     } catch (error) {
+    //         console.error('Erro ao deletar os registros:', error);
+    //     }
+    // }
 
-async function login(dados) {
-    try {
-        await deleteAllLogins();
-        localStorage.setItem("user",JSON.stringify(dados))
-        const response = await axios.post('http://localhost:3000/logado', dados);
-        window.location.href = 'calendario.html';
-        console.log('Login realizado com sucesso:', response.data);
-    } catch (error) {
-        console.error('Erro ao realizar o login:', error);
-    }
-}
+    // async function login(dados) {
+    //     try {
+    //         await deleteAllLogins();
+    //         localStorage.setItem("user", JSON.stringify(dados))
+    //         const response = await axios.post('http://localhost:3000/logado', dados);
+    //         window.location.href = 'calendario.html';
+    //         console.log('Login realizado com sucesso:', response.data);
+    //     } catch (error) {
+    //         console.error('Erro ao realizar o login:', error);
+    //     }
+    // }
 
 
     //mascara CPF
-    $(document).on('input', '#cpf', function() {
+    $(document).on('input', '#cpf', function () {
         let value = $(this).val();
 
         value = value.replace(/\D/g, '').substring(0, 11);
@@ -92,11 +92,11 @@ async function login(dados) {
         }
     }
 
-    $('#btnCadastro').click(function () {
+    $('#btnCadastro').click(async function () {
 
-        let Validado = ImputValidation();
-
-        if (Validado) {
+         let Validado = ImputValidation();
+         let SameEmail = await HaveSameEmail();
+        if (Validado && !SameEmail) {
             var DbCadastro = {
                 nome: {
                     primeiroNome: $('#PrimeiroNome').val(),
@@ -114,7 +114,7 @@ async function login(dados) {
 
             console.log(DbCadastro);
 
-            
+
 
             fetch('http://localhost:3000/cadastros', {
                 method: 'POST',
@@ -125,24 +125,21 @@ async function login(dados) {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data);   
+                    console.log('Success:', data);
                     swal.fire({
                         title: 'Cadastro realizado com sucesso',
-                        icon:'success',
-                        text:"Você será redirecionado para a página principal"
+                        icon: 'success',
+                        text: "Você será redirecionado para a página principal"
                     }).then((result => {
-                        if(result.isConfirmed){
-                            login(data)
+                        if (result.isConfirmed) {
+                            window.location.href = 'login.html';
                         }
-                    }))    
+                    }))
                 })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
         }
-
-
-
     });
 
 
@@ -164,7 +161,7 @@ async function login(dados) {
             return false;
         }
 
-        if (!$('#email').val().split('').includes('@') ) {
+        if (!$('#email').val().split('').includes('@')) {
             ShowAlert("Os endereços de email não se coincidem. Por favor, verifique e tente novamente.", "danger");
             return false;
         }
@@ -180,18 +177,33 @@ async function login(dados) {
         }
 
 
-        if ($('#imputOrganizador').length){
+        if ($('#imputOrganizador').length) {
             if ($('#cpf').val().length != 14) {
                 ShowAlert("CPF invalido, CPF possui 11 digitos.", "danger");
                 return false;
             }
         }
-    
+
         return true;
 
     }
 
+     async function HaveSameEmail(){
+        const email = $('#email').val();
+        const response = await fetch('http://localhost:3000/cadastros');
+        const cadastros = await response.json();
+          const sameEmail = cadastros.find(cadastro => cadastro.email === email);
+          if (sameEmail){
+            ShowAlert("Já existe um usuario com esse email", "danger");
+            return true;
+          }
+          else{
+            return false;
+          }
+    }
+
     
+
     function ShowAlert(message, type = "danger") {
         let alertContainer = $("#alertContainer");
 
@@ -209,7 +221,11 @@ async function login(dados) {
         }, 3000);
     }
 
+    
+    $('#btnGoLogin').on('click', function() {
+        window.location.href = 'login.html';
+    });
 
-   
+
 
 });

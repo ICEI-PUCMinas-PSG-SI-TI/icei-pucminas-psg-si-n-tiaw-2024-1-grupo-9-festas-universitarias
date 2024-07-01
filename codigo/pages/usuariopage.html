@@ -77,18 +77,23 @@
     border-radius: 50%;
     padding: 5px;
   }
+  
 </style>
 </head>
 
-<body style="background: #0f0f0f;">
+<body style="background: #ffffff;">
 
-  <nav class="container p-2 mb-3 mt-3">
+  <nav class="container d-flex justify-content-center mt-3">
     <div class="d-flex align-items-center justify-content-start gap-3">
-      <div class="profile-container" style="width: 50px; height: 50px;">
+      <a class="profile-container border border-dark-subtle" style="width: 50px; height: 50px;" >
         <img id="ftSaldacao" src="https://sistemas.ft.unicamp.br/sgpg/imagens/sem_foto.png" alt="">
-      </div>
-      <p class="m-0 fs-3 text-white">Olá <span class="text-primary" id="usuario"></span></p>
+      </a>
+      <p class="m-0 fs-3 text-black">Olá <span class="text-primary" id="usuario"></span></p>
     </div>
+    <a class="ms-auto text-dark" href="calendario.html">
+
+      <i class="bi bi-house fs-1"></i>
+  </a>
   </nav>
 
   <div class="container-fluid">
@@ -126,14 +131,21 @@
           </div>
         </div>
       </form>
-      <div class="d-flex justify-content-end w-100 container my-5">
-        <button type="button" id="btnSalvar" class="btn btn-primary btn-block m-2" style="width: 150px;">Salvar</button>
-      </div>
+
+
     </div>
     
+
   </div>
+
+  
   <div id="alertContainer"></div>
 
+  <div class="d-flex justify-content-end w-100 container my-5  py-5">
+    <button type="button" id="btnSalvar" class="btn btn-primary btn-block m-2" style="width: 150px;">Salvar</button>
+    <button type="button" id="btnDeslogar" class="btn btn-primary btn-block m-2" style="width: 150px;">Deslogar</button>
+  </div>
+  
   <script src="../assets/js/usuario.js"></script>
 </body>
 
