@@ -46,7 +46,7 @@ $(document).ready(function () {
 
     $('#btnEntrar').click(function () {
         const email = $('#emailLogin').val();
-        const senha = CryptoJS.MD5($('senhaLogin').val()).toString();              
+        const senha = CryptoJS.MD5($('#senhaLogin').val()).toString();              
         console.log(email+","+senha);
         fetch('http://localhost:3000/cadastros')
             .then(response => response.json())

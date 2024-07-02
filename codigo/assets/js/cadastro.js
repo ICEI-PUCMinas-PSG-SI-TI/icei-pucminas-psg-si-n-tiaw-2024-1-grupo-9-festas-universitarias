@@ -103,7 +103,7 @@ $(document).ready(function () {
                     ultimoNome: $('#UltimoNome').val()
                 },
                 email: $('#email').val(),
-                senha: CryptoJS.MD5($('senha').val()).toString(),
+                senha: CryptoJS.MD5($('#senha').val()).toString(),
                 nomeuniversidade: $('#nomeuniversidade').val(),
                 universidadeID: $('#universidadeID').val(),
                 TipoUsuario: $('input[name="role"]:checked').val(),
