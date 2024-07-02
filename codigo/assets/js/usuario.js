@@ -17,19 +17,11 @@ $(document).ready(function () {
         "placeholder",
         `${usuarioAtual.nomeuniversidade}`
       );
-      if (usuarioAtual.fotoPerfil === "") {
-        $("#ftSaldacao").attr(
-          "src",
-          "https://sistemas.ft.unicamp.br/sgpg/imagens/sem_foto.png"
-        );
-        $("#ftPerfil").attr(
-          "src",
-          "https://sistemas.ft.unicamp.br/sgpg/imagens/sem_foto.png"
-        );
-      } else {
-        $("#ftSaldacao").attr("src", usuarioAtual.fotoPerfil);
-        $("#ftPerfil").attr("src", usuarioAtual.fotoPerfil);
-      }
+      const profilePicture = usuarioAtual.fotoPerfil === ""
+        ? "https://sistemas.ft.unicamp.br/sgpg/imagens/sem_foto.png"
+        : usuarioAtual.fotoPerfil;
+      $("#ftSaldacao").attr("src", profilePicture);
+      $("#ftPerfil").attr("src", profilePicture);
     } catch (error) {
       console.error("Erro ao buscar usuário:", error);
     }
@@ -59,10 +51,10 @@ $(document).ready(function () {
     var isDisabled = $("#UserLogado").prop("disabled");
     $("#UserLogado").prop("disabled", !isDisabled).focus();
   });
+
   $("#UserLogado").on("change", function (e) {
     const nomeCompleto = e.target.value;
     const nomes = nomeCompleto.split(" ");
-
     if (nomes.length >= 2) {
       usuarioAtual.nome.primeiroNome = nomes[0];
       usuarioAtual.nome.ultimoNome = nomes[1];
@@ -76,12 +68,11 @@ $(document).ready(function () {
     var isDisabled = $("#EmailUser").prop("disabled");
     $("#EmailUser").prop("disabled", !isDisabled).focus();
   });
+
   $("#EmailUser").on("change", function (e) {
     const Email = e.target.value;
     if (Email.length != 0) {
       usuarioAtual.email = Email;
-    } else {
-      usuarioAtual.email = usuarioAtual.email;
     }
   });
 
@@ -89,20 +80,23 @@ $(document).ready(function () {
     var isDisabled = $("#NameUniversidade").prop("disabled");
     $("#NameUniversidade").prop("disabled", !isDisabled).focus();
   });
+
   $("#NameUniversidade").on("change", function (e) {
     const NameUniversidade = e.target.value;
     if (NameUniversidade.length != 0) {
       usuarioAtual.nomeuniversidade = NameUniversidade;
-    } else {
-      usuarioAtual.nomeuniversidade = usuarioAtual.nomeuniversidade;
     }
   });
 
   $("#btnSalvar").on("click", async function () {
+    salvarCadastro();
+    salvarNoLogin();
+  });
+
+  async function salvarCadastro(){
     try {
       await axios.put(
-        `http://localhost:3000/logado/${usuarioAtual.id}`,
-        usuarioAtual,
+        `http://localhost:3000/cadastros/${usuarioAtual.id}`,usuarioAtual,
         {
           headers: {
             "Content-Type": "application/json",
@@ -118,6 +112,7 @@ $(document).ready(function () {
         .then((result) => {
           if (result.isConfirmed) {
             location.reload();
+            location.reload();
           }
         });
     } catch (error) {
@@ -128,8 +123,40 @@ $(document).ready(function () {
         text: "",
       });
     }
-  });
+  }
 
+  async function salvarNoLogin(){
+    try {
+      await axios.put(
+        `http://localhost:3000/logado/${usuarioAtual.id}`,usuarioAtual,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      swal
+        .fire({
+          title: "Alterações salvas com sucesso",
+          icon: "success",
+          text: "",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+            location.reload();
+          }
+        });
+    } catch (error) {
+      console.error("Error:", error);
+      swal.fire({
+        title: "Erro ao salvar alterações",
+        icon: "error",
+        text: "",
+      });
+    }
+  }
+  
   $("#btnDeslogar").on("click", async function () {
     const apiUrl = "http://localhost:3000/logado";
 
@@ -166,9 +193,7 @@ $(document).ready(function () {
     }
   });
 
-  $('#btnGoHome').on('click', function() {
+  $('#btnGoHome').on('click', function () {
     window.location.href = 'calendario.html';
-});
-
-
+  });
 });
